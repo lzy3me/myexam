@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>MyExam</title>
+
+    <!-- ====== Stylesheet ====== -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <!-- ======= Script ======= -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://kit.fontawesome.com/1ddae515d7.js"></script>
+
+</head>
+<style>
+    .con-center {
+        padding: 0 50px;
+    }
+    .con-inside {
+        padding: 20px;
+    }
+    .con-bottom {
+        padding-bottom: 50px;
+    }
+</style>
+<body>
+    <div class="container-fluid">
+        
+        <div class="con-center">
+            
+            <div class="card con-inside">
+                <div class="card-body">
+                    <h3 class="title text-center">
+                        <span style="float: left">
+                            <button class="btn btn-primary" data-toggle="tooltip" title="กลับไปข้อก่อนหน้า">
+                                <i class="fas fa-arrow-left"></i>
+                            </button>
+                        </span>
+                        Pretest - Myexam
+                    </h3>
+                    <br>
+                    <!-- Topic -->
+                    <p class="card-text" data-sec="1">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo?</p>
+                    <br>
+
+                    <!-- Selector -->
+                    <div class="row">
+                        <div class="col-sm-6" style="padding: 4px;">
+                            <button class="btn btn-dark btn-block" onclick="getAwnser('bt-1')" id="bt-1" data-select="0">1</button>
+                        </div>
+                        <div class="col-sm-6" style="padding: 4px;">
+                            <button class="btn btn-dark btn-block" onclick="getAwnser('bt-2')" id="bt-2" data-select="0">2</button>
+                        </div>
+                        <div class="col-sm-6" style="padding: 4px;">
+                            <button class="btn btn-dark btn-block" onclick="getAwnser('bt-3')" id="bt-3" data-select="0">3</button>
+                        </div>
+                        <div class="col-sm-6" style="padding: 4px;">
+                            <button class="btn btn-dark btn-block" onclick="getAwnser('bt-4')" id="bt-4" data-select="0">4</button>
+                        </div>
+                    </div>
+                    <!-- End Selecter -->
+                    
+                    <div class="con-bottom"></div>
+                    <div class="progress">
+                        <div class="progress-bar" style="width:10%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+<script>
+    var question = 0;
+
+    function isButtonPress(button) {
+        var b = document.getElementById(button);
+
+        if (checkButtonData(b)) {
+            sessionDataSet(b);
+        }
+    }
+
+    function checkButtonData(bdata) {
+        var s = bdata.getAttribute('data-select');
+
+        if (s !== '1')
+            return true;
+        else
+            return false;
+    }
+</script>
+</html>
