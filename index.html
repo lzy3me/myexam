@@ -100,7 +100,7 @@
                         
                         <div class="con-bottom"></div>
                         <div class="progress">
-                            <div class="progress-bar" style="width:10%"></div>
+                            <div class="progress-bar" id="progress" style="width:10%"></div>
                         </div>
                     </div>
                 </div>
@@ -154,8 +154,9 @@
 
         // Get data attribute for check total quest that answer
         var index = q.getAttribute('data-q');
+        console.log(index);
 
-        if (index <= question) {
+        if (index < question) {
             if (index > 0) {
                 document.getElementById('back').disabled = '';
             } else {
@@ -171,6 +172,7 @@
             e.innerHTML = qu;
             index++
             q.setAttribute('data-q', index);
+            document.getElementById('progress').innerHTML = index;
         }
         
     }

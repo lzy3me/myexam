@@ -1,7 +1,8 @@
 {
     "module": {
         "number": 1,
-        "subject": "Mathmetric",
+        "author": "tutorsoft",
+        "subject": "คณิตศาสตร์",
         "question": 4
     },
     "quiz": [
