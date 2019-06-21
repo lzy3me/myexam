@@ -20,7 +20,7 @@
         padding: 0 100px;
     }
     .con-inside {
-        padding: 20px;
+        padding: 10px;
     }
     .con-bottom {
         padding-bottom: 50px;
@@ -44,7 +44,7 @@
                 <div class="con-inside">
                     <!-- Welcome Screen ask student to select subject before begin -->
                     <!-- Begin Subject Select -->
-                    <div class="card-body block-display" id="welcome">
+                    <div class="card-body none-display" id="welcome">
                         <h3 class="title text-center">
                             โปรดเลือกวิชาที่ต้องการทดสอบ
                         </h3>
@@ -66,44 +66,58 @@
                     </div>
                     <!-- End Subject Select -->
 
-                    <div class="card-body none-display" id="test">
-                        <h3 class="title text-center" id="title">
-                            <span style="float: left">
-                                <button class="btn btn-primary" data-toggle="tooltip" 
-                                onclick="getBack()" title="กลับไปข้อก่อนหน้า">
-                                    <i class="fas fa-arrow-left"></i>
-                                </button>
-                            </span>
+
+                    <!-- เริ่มแก้ตรงนี้นะจ้ะ -->
+                    <div class="card-body block-display" id="test">
+                        <h3 >
                             Pretest - Myexam
                         </h3>
                         <br>
                         <!-- Topic -->
-                        <p class="card-text" id="question" data-q=0>?</p>
+                        <p class="card-text" id="question" data-q=0>ข้อที่1. 1+1=?</p>
                         <br>
 
                         <!-- Selector -->
                         <div class="row" id="quiz-section">
                             <div class="col-sm-6" style="padding: 4px;">
-                                <button class="btn btn-dark btn-block" onclick="getAnswer('bt-1')" id="bt-1" data-select="1">1</button>
+                                <button class="btn btn-info btn-block " onclick="getAnswer('bt-1')" id="bt-1" data-select="1">1</button>
                             </div>
                             <div class="col-sm-6" style="padding: 4px;">
-                                <button class="btn btn-dark btn-block" onclick="getAnswer('bt-2')" id="bt-2" data-select="2">2</button>
+                                <button class="btn btn-info btn-block" onclick="getAnswer('bt-2')" id="bt-2" data-select="2">2</button>
                             </div>
                             <div class="col-sm-6" style="padding: 4px;">
-                                <button class="btn btn-dark btn-block" onclick="getAnswer('bt-3')" id="bt-3" data-select="3">3</button>
+                                <button class="btn btn-info btn-block" onclick="getAnswer('bt-3')" id="bt-3" data-select="3">3</button>
                             </div>
                             <div class="col-sm-6" style="padding: 4px;">
-                                <button class="btn btn-dark btn-block" onclick="getAnswer('bt-4')" id="bt-4" data-select="4">4</button>
+                                <button class="btn btn-info btn-block" onclick="getAnswer('bt-4')" id="bt-4" data-select="4">4</button>
                             </div>
                         </div>
                         <!-- End Selecter -->
                         
                         <div class="con-bottom"></div>
                         <div class="progress">
-                            <div class="progress-bar" id="progress" style="width:10%"></div>
+                            <div class="progress-bar" id="progress" style="width:1%"></div>
                         </div>
                     </div>
-                </div>
+                    <class="title text-center" id="title">
+                            <span style="float: left">
+                                <button class="btn btn-info" data-toggle="tooltip" 
+                                onclick="getBack()" title="กลับไปข้อก่อนหน้า">
+                                    <i class="fas fa-arrow-left"></i>
+                                </button>
+                            </span>
+                               <class="title text-center" id="title">
+                            <span style="float: right">
+                                <button class="btn btn-info" data-toggle="tooltip" 
+                                onclick="getBack()" title="ข้อต่อไป">
+                                    <i class="fas fa-arrow-right"></i>
+                                </button>
+                            </span>
+                            
+                          
+                    <!-- จบตรงนี้นะจ้ะ -->
+
+               
                 
             </div>
         </div>
