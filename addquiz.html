@@ -5,8 +5,389 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Add Quiz - Teacher | Tutorsoft</title>
+
+    <!-- ====== Stylesheet ====== -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <!-- ======= Script ======= -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://kit.fontawesome.com/1ddae515d7.js"></script>
 </head>
-<body>
-    
+<style>
+.con-width-limit {
+    padding: 0 100px 0 100px;
+}
+.con-panel {
+    height: 75vh;
+}
+
+@media (min-width:768px) {
+    .con-panel {
+        height: 60vh;
+    }
+}
+</style>
+<body class="bg-dark">
+    <div class="container-fluid">
+        <div class="card" id="note">   
+            <div class="card-header">
+                <a href="javascript:;" style="float: right; margin-left: 15px;" class="btn btn-outline-danger btn-sm">
+                    <i class="fas fa-times"></i>
+                </a>
+                <a href="javascript:;" id="back" style="float: right; margin-left: 15px;" class="btn btn-outline-warning btn-sm">
+                    <i class="fas fa-arrow-left"></i>
+                </a>
+                <h5>ระบบการจัดการแบบทดสอบ <span id=subtitle></span>
+                    <span id="total" style="float: right; color: #707070">1/1</span>
+                </h5>
+            </div>
+            <div class="card-body con-panel">
+                <div class="h-100">
+                    <div id="home" class="text-center">
+                        <h3 id="nameof">Quiz Test Dashboard</h3>
+                        <div style="padding-bottom: 50px;"></div>
+                        <div class="btn-group-vertical btn-block btn-group-lg con-width-limit">
+                            <a href="javascript:;" id="getList" class="btn btn-outline-info">
+                                <i class="fas fa-list-ol"></i> ติดตามผลการทดสอบ</a>
+                            <a href="javascript:;" id="addQuiz" class="btn btn-outline-success">
+                                <i class="far fa-file"></i> เพิ่มแบบทดสอบใหม่</a>
+                            <a href="javascript:;" id="editQuiz" class="btn btn-outline-warning">
+                                <i class="fas fa-pencil-ruler"></i> แก้ไขแบบทดสอบที่มีอยู่</a>
+                        </div>
+                    </div>
+
+                    <div id="list">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>ชื่อนักเรียน</th>
+                                        <th>ชื่อแบบทดสอบ</th>
+                                        <th>รายวิชา</th>
+                                        <th>เวลาเริ่มทำ</th>
+                                        <th>เวลาทำจบ</th>
+                                        <th>ทำได้</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="getlist">
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div id="manager">
+                        <div id="addname" class="text-center">
+                            <div style="padding-top: 10vh"></div>
+                            <div class="form-group">
+                                <label for="quizname" style="float: left">ชื่อแบบทดสอบ</label>
+                                <input type="text" name="quizname" id="quizname" class="form-control">
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="subject" style="float: left;">รายวิชา :</label>
+                                        <select class="form-control" id="subject">
+                                            <option>คณิตศาสตร์</option>
+                                            <option>วิทยาศาสตร์</option>
+                                            <option>ภาษาอังกฤษ</option>
+                                            <option>ภาษาไทย</option>
+                                            <option>คอมพิวเตอร์</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="editselect">
+
+                        </div>
+
+                        <div id="quizlist">
+                            <h4 id="quiztitle"></h4>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="subject">รายวิชา : <span id="subjecttitle"></span></label>
+                                    </div>
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="form-group">
+                                        <label for="comment">คำถาม :</label>
+                                        <textarea class="form-control" rows="3" id="comment" data-page=0></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-1">
+                                    <div class="form-group">
+                                        <label class="form-label">เลือกข้อที่ถูก :</label>
+                                        <select class="form-control" id="correct">
+                                            <option>1</option>
+                                            <option>2</option>
+                                            <option>3</option>
+                                            <option>4</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-11">
+                                    <div class="form-group">
+                                        <label class="form-label">เพิ่มคำตอบ:</label>
+                                        <div class="input-group mb-3">
+                                            <input type="Question" class="form-control" id="inputQuestion0" placeholder="คำตอบที่ 1">
+                                            <input type="Question" class="form-control" id="inputQuestion1" placeholder="คำตอบที่ 2">
+                                        </div>
+                                        <div class="input-group mb-3">
+                                            <input type="Question" class="form-control" id="inputQuestion2" placeholder="คำตอบที่ 3">
+                                            <input type="Question" class="form-control" id="inputQuestion3" placeholder="คำตอบที่ 4">
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <h4 class="quizname">
+                            Lorem ipsum dolor sit amet,
+                        </h4>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="subject">รายวิชา :</label>
+                                    
+                                </div>
+                            </div>
+                            <div class="col-md-9">
+                                <div class="form-group">
+                                    <label for="comment">คำถาม:</label>
+                                    <textarea class="form-control" rows="3" id="comment"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-1">
+                                <div class="form-group">
+                                    <label class="form-label">เลือกข้อที่ถูก :</label>
+                                    <select class="form-control" id="correct">
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-11">
+                                <div class="form-group">
+                                    <label class="form-label">เพิ่มคำตอบ:</label>
+                                    <div class="input-group mb-3">
+                                        <input type="Question" class="form-control" id="inputQuestion" placeholder="คำตอบที่ 1">
+                                        <input type="Question" class="form-control" id="inputQuestion" placeholder="คำตอบที่ 2">
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <input type="Question" class="form-control" id="inputQuestion" placeholder="คำตอบที่ 3">
+                                        <input type="Question" class="form-control" id="inputQuestion" placeholder="คำตอบที่ 4">
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <div id="addquiz-footer" class="text-center">
+                    <a href="javascript:;" id="addtodb" class="btn btn-outline-primary btn-lg" title="เพิ่มใหม่" data-toggle="tooltip">
+                        <i class="fas fa-plus"></i> เพิ่มแบบทดสอบใหม่
+                    </a>
+                </div>
+                <div id="manager-footer" class="text-center">
+                    <a href="javascript:;" id="quizBack" class="btn btn-outline-success btn-lg">ข้อก่อนหน้า</a>
+                    <a href="javascript:;" id="quizDelete" class="btn btn-outline-danger btn-lg" title="ลบ..." data-toggle="tooltip">
+                        <i class="fas fa-trash-alt"></i>
+                    </a>
+                    <a href="javascript:;" id="saveQuiz" class="btn btn-outline-primary btn-lg" title="บันทึก" data-toggle="tooltip">
+                        <i class="far fa-save"></i>
+                    </a>
+                    <!-- <a href="javascript:;" class="btn btn-outline-primary btn-lg" title="เพิ่ม" data-toggle="tooltip">
+                        <i class="fas fa-plus"></i>
+                    </a> -->
+                    <a href="javascript:;" id="nextQuiz" class="btn btn-outline-success btn-lg">ข้อถัดไป</a>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
+<script>
+    var obj = [];
+    var answer = [];
+
+    $(document).ready(callHome());
+
+    // Listening to button by id
+    $('#back').on('click', callHome);
+    $('#getList').on('click', onGetList);
+    $('#addQuiz').on('click', onAddQuiz);
+    $('#editQuiz').on('click', onEditQuiz);
+    $('#addtodb').on('click', callEditList);
+    $('#backQuiz').on('click', () => {});
+    $('#nextQuiz').on('click', nextQuiz);
+
+    function callHome() {
+        // Hide this element
+        $('#back, #total, #list, #manager, #manager-footer, #addquiz-footer, #quizlist').hide();
+
+        //Show this element
+        $('#home').show();
+        $('#getlist').html('');
+
+        // Clear Storage
+        sessionStorage.clear();
+
+        // Clear All input
+        $('#quizname, #subject').val('');
+
+        // Change back to original panel size
+        $('.card-body').addClass('con-panel');
+    }
+
+    function onPanelChange(state) {
+        function hidehome() {
+            $('#back').show();
+            $('#home').hide();
+        }
+        switch (state) {
+            default:
+                hidehome();
+                break;
+
+            case 'a':
+                hidehome();
+                // Hide this
+                $('#editselect, #editquiz').hide();
+                // Show this
+                $('#manager, #addname, #addquiz-footer').show();
+                break;
+            
+            case 'es':
+                hidehome();
+                // Hide this
+                $('#addname, #quizlist, #addquiz-footer').hide();
+                // Show this
+                $('#manager, #editselect').show();
+                break;
+
+            case 'ed':
+                hidehome();
+                // Hide this
+                $('#addname, #editselect, #addquiz-footer').hide();
+                // Show this
+                $('#manager, #manager-footer, #quizlist').show();
+                break;
+        }
+    }
+
+    function onGetList() {
+        onPanelChange();
+        $.ajax({
+            url: '/api/quiz?on=getloggerlist',
+            type: 'GET',
+            success: (result) => {
+                var json = $.parseJSON(result);
+                var list = '';
+                $.each(json, (index, val) => {
+                    list += '<tr><td>' + '</td><td>' +val.quiz_name+ '</td><td>' +val.quiz_subject
+                        + '</td><td>' +val.startDate+ '</td><td>' +val.endDate+ '</td><td>' +val.quiz_score
+                        + '</td></tr>';
+                });
+                $('#getlist').html(list);
+            }
+        });
+        $('#list').show();
+        $('.card-body').removeClass('con-panel');
+    }
+
+    function onAddQuiz() {
+        onPanelChange('a');
+
+    }
+
+    function onEditQuiz() {
+
+    }
+
+    function callEditList() {
+        var quizName = $('#quizname').val();
+        var quizSubject = $('#subject').val();
+        $('#quizname, #subject').val('');
+        sessionStorage.quizName = quizName;
+        sessionStorage.quizSubject = quizSubject;
+        onPanelChange('ed');
+        $('#quiztitle').html(sessionStorage.quizName);
+        $('#subjecttitle').html(sessionStorage.quizSubject);
+    }
+
+    function nextQuiz() {
+        var attr = $('#comment').attr('data-page');
+        if (attr == 0) {
+            console.log('NOR THIS');
+            if (obj.length <= 0) {
+                if ($('#quizlist :input').val() != '') {
+                    var ans = $('#comment').val();
+                    var anslist = [];
+                    for (var i=0; i<4; i++) {
+                        anslist.push([i, $('#inputQuestion'+i.toString()).val()]);
+                    }
+                    obj = [{'no': ans, 'answer': anslist}];
+                    answer.push($('#correct').val());
+                    $('#comment').attr('data-page)', 1);
+                } else {
+                    alert('กรุณากรอก คำถาม คำตอบ ให้เรียบร้อยก่อนเพิ่มข้อ');
+                }
+                $('#comment, #inputQuestion0, #inputQuestion1, #inputQuestion2, #inputQuestion3').val('');
+            }
+        } else {
+            console.log('DOING THIS');
+            if (attr != obj.length) {
+                $('#comment').val(obj[attr].no);
+                for (var i=0; i<4; i++) {
+                    $('#inputQuestion'+i.toString()).val(obj[attr].answer[i]);
+                }
+            } else {
+                if ($('#quizlist :input').val() != '') {
+                    var ans = $('#comment').val();
+                    var anslist = [];
+                    for (var i=0; i<4; i++) {
+                        anslist.push([i, $('#inputQuestion'+i.toString()).val()]);
+                    }
+                    obj.push({'no': ans, 'answer': anslist});
+                    $('#comment').attr('data-page', parseInt(attr)+1);
+                } else {
+                    alert('กรุณากรอก คำถาม คำตอบ ให้เรียบร้อยก่อนเพิ่มข้อ');
+                }
+            }
+            $('#comment, #inputQuestion0, #inputQuestion1, #inputQuestion2, #inputQuestion3').val('');
+        }
+    }
+
+    function onSaveToDB() {
+        $.ajax({
+            url: 'api/quiz?on=addquiz&qname=' +sessionStorage.getItem('quizName')
+                + '&qsub=' +sessionStorage.getItem('quizSubject')+ 'qcorrect=' +answer.join(''),
+            type: 'POST',
+            success: (result) => {
+
+            }
+        });
+    }
+
+    // function countChar(val) {
+    //     var len = val.value.length;
+    //     if (len >= 500) {
+    //         val.value = val.value.substring(0, 500);
+    //     } else {
+    //         $('#countChar').text(500 - len);
+    //     }
+    // }
+
+</script>
 </html>

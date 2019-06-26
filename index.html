@@ -16,14 +16,10 @@
 
 </head>
 <style>
-    .con-center {
-        padding: 0 100px;
-    }
-    .con-inside {
-        padding: 10px;
-    }
-    .con-bottom {
-        padding-bottom: 50px;
+    .con-subject {
+        float: right;
+        font-size: 75%;
+        color: #707070;
     }
     .none-display {
         display: none;
@@ -31,164 +27,208 @@
     .block-display {
         display: block;
     }
+    .panel-fix-height {
+      height: 75vh;
+    }
+    
+    @media (min-width: 786px) {
+      .panel-fix-height {
+        height: 60vh;
+      }
+    }
+    .con-check {
+        float: left;
+    }
+    .con-score {
+        width: 200px;
+        height: 200px;
+        border: 5px solid;
+        font-size: 3em;
+        border-radius: 50%;
+        line-height: 200px;
+        text-align: center;
+        position: relative;
+        display: inline-block;
+    }
+    .con-good {
+        border-color: #388e3c;
+        background-color: #6abf69;
+    }
+    .con-mid {
+        border-color: #fb8c00;
+        background-color: #ffbd45;
+    }
+    .con-bad {
+        border-color: #f4511e;
+        background-color: #ff844c;
+    }
 </style>
 <body>
     <div class="container-fluid">
         
-        <div class="con-center">
-            
-            <div class="card" id="note">
-                <div class="card-header">
-                    <h5>แบบทดสอบก่อนเรียน</h5>
-                </div>
-                <div class="con-inside">
-                    <!-- Welcome Screen ask student to select subject before begin -->
-                    <!-- Begin Subject Select -->
-                    <div class="card-body none-display" id="welcome">
-                        <h3 class="title text-center">
-                            โปรดเลือกวิชาที่ต้องการทดสอบ
-                        </h3>
-                        <br>
-                        <div class="form-group">
-                            <label for="getclass">เลือกวิชา:</label>
-                            <select class="form-control" id="getclass" name="sellist1">
-                                <option value="none" disabled selected>--- เลือกวิชา ---</option>
-                                <option value="1">คณิตศาสตร์</option>
-                                <option value="1">เคมี</option>
-                                <option value="1">วิทยาการคำนวณ</option>
-                                <option value="1">ภาษาอังกฤษ</option>
-                            </select>
-                        </div>
-                        <a href="javascript:;" class="btn btn-xl btn-block btn-success"
-                        onclick="getQuestion()">
-                            เริ่มทำแบบทดสอบ
-                        </a>
-                    </div>
-                    <!-- End Subject Select -->
-
-
-                    <!-- เริ่มแก้ตรงนี้นะจ้ะ -->
-                    <div class="card-body block-display" id="test">
-                        <h3 >
-                            Pretest - Myexam
+        <!-- Web Face Begin -->
+        <div class="card">
+            <div class="card-header">
+                <h4>การทดสอบประมวลความรู้
+                    <span class="con-subject">
+                        รายวิชา <span id="subject">Math</span>
+                    </span>
+                </h4>
+            </div>
+            <div class="card-body panel-fix-height">
+                <div class="h-100 text-center">                    
+                    <!-- Quiz Panel -->
+                    <div class="block-display" id="test">
+                        <h3 id="name">
+                            TEST
                         </h3>
                         <br>
                         <!-- Topic -->
-                        <p class="card-text" id="question" data-q=0>ข้อที่1. 1+1=?</p>
+                        <h4 class="card-text" id="quest" data-q=0>ข้อที่ 
+                            <span id="no"></span> 
+                            <span id="question"></span>
+                        </h4>
                         <br>
-
+        
                         <!-- Selector -->
-                        <div class="row" id="quiz-section">
-                            <div class="col-sm-6" style="padding: 4px;">
-                                <button class="btn btn-info btn-block " onclick="getAnswer('bt-1')" id="bt-1" data-select="1">1</button>
-                            </div>
-                            <div class="col-sm-6" style="padding: 4px;">
-                                <button class="btn btn-info btn-block" onclick="getAnswer('bt-2')" id="bt-2" data-select="2">2</button>
-                            </div>
-                            <div class="col-sm-6" style="padding: 4px;">
-                                <button class="btn btn-info btn-block" onclick="getAnswer('bt-3')" id="bt-3" data-select="3">3</button>
-                            </div>
-                            <div class="col-sm-6" style="padding: 4px;">
-                                <button class="btn btn-info btn-block" onclick="getAnswer('bt-4')" id="bt-4" data-select="4">4</button>
-                            </div>
-                        </div>
+                        <div class="row" id="quiz-section"></div>
                         <!-- End Selecter -->
-                        
-                        <div class="con-bottom"></div>
-                        <div class="progress">
-                            <div class="progress-bar" id="progress" style="width:1%"></div>
-                        </div>
                     </div>
-                    <class="title text-center" id="title">
-                            <span style="float: left">
-                                <button class="btn btn-info" data-toggle="tooltip" 
-                                onclick="getBack()" title="กลับไปข้อก่อนหน้า">
-                                    <i class="fas fa-arrow-left"></i>
-                                </button>
-                            </span>
-                               <class="title text-center" id="title">
-                            <span style="float: right">
-                                <button class="btn btn-info" data-toggle="tooltip" 
-                                onclick="getBack()" title="ข้อต่อไป">
-                                    <i class="fas fa-arrow-right"></i>
-                                </button>
-                            </span>
-                            
-                          
-                    <!-- จบตรงนี้นะจ้ะ -->
-
-               
-                
+                    <!-- End -->
+                    
+                    <!-- Score Panel -->
+                    <div class="none-display" id="scorepanel">
+                        <br><br>
+                        <div class="con-score con-good" id="score">NaN</div>
+                        <br><br>
+                        <h3>ผลคะแนนของคุณ <span id="score-type" style="font-weight: bold;">NaN</span></h3>
+                    </div>
+                    <!-- End -->
+                </div>
+            </div>
+            <div class="card-footer text-center">
+                <div id="footer">
+                    <a href="javascript:;" onclick="onGetBack();" class="btn btn-outline-primary btn-lg"><i class="fas fa-arrow-left"></i></a>
+                    <span id="submit">
+                        <a href="javascript:;" class="btn btn-outline-success btn-lg">ส่งคำตอบ</a>
+                    </span>
+                    <a href="javascript:;" class="btn btn-outline-primary btn-lg"><i class="fas fa-arrow-right"></i></a>
+                </div>
             </div>
         </div>
-
     </div>
 </body>
 <script>
+    var i = 0;
     var obj = '';
-    var subject = '';
+    var sendObj = [];
+    var quizPath = '/';
     var question = 0;
-    var backBtn = '<span style="float: left"><button class="btn btn-primary" data-toggle="tooltip"'
-                + ' onclick="getBack()" id="back" title="กลับไปข้อก่อนหน้า">'
-                + ' <i class="fas fa-arrow-left"></i></button></span>';
 
-    function getQuestion() {
-        console.log('okay');
-        var request = new XMLHttpRequest();
-        request.open("GET", "quiz.json", false);
-        request.send(null)
-        obj = JSON.parse(request.responseText);
+    $.when(() => {
+
+    }).then(() => {
         
-        subject = obj.module.subject;
-        question = obj.module.question;
+    })
 
-        initChange();
-        getNextQuestion();
+    $(document).ready(() => {
+        $.when(obj = randomThis(getQuizFile('quiz.txt'))).then(getNextQuiz());
+    });
+    
+    function getQuizFile(file) {
+        var o = '';
+        var request = new XMLHttpRequest();
+        request.open('GET', quizPath + file, false);
+        request.send(null)
+        try {
+            o = $.parseJSON(request.responseText);
+        } catch (err) {
+            o = err.message;
+            alert('เกิดข้อผิดพลาด: '+o);
+            //window.location.reload();
+        }
+        return o;
     }
-
-    function initChange() {
-        var w = document.getElementById('welcome');
-        var t = document.getElementById('test');
-
-        w.classList.remove('block-display');
-        w.classList.add('none-display');
-
-        t.classList.remove('none-display');
-        t.classList.add('block-display');
-
-        document.getElementById('title').innerHTML = backBtn + subject;
-    }
-
-    function getNextQuestion() {
+    
+    function getNextQuiz() {
         // Get Element For Question
-        var i = 0;
-        var q = document.getElementById('question');
-        var e = document.getElementById('quiz-section');
-        var qu = '';
+        var txt = '';
 
         // Get data attribute for check total quest that answer
-        var index = q.getAttribute('data-q');
+        var index = $('#quest').attr('data-q');
         console.log(index);
+        if (index < obj.length) {
+            // Print next question
+            txt = obj[index].no;
+            $('#no').html(parseInt(index)+1+' )');
+            $('#question').html(txt);
 
-        if (index < question) {
-            if (index > 0) {
-                document.getElementById('back').disabled = '';
-            } else {
-                document.getElementById('back').disabled = true;
+            // Clear text data
+            txt = '';
+        
+        
+            obj[index].answer = randomThis(obj[index].answer);
+            for (i=0; i<obj[index].answer.length; i++) {
+                txt += '<div class="col-sm-6" style="padding: 4px;"><a href="javascript:;" '
+                + 'class="btn btn-lg btn-info btn-block" onclick="getAnswer('+obj[index].index+','
+                +obj[index].answer[i][0]+')"><span id="id'+obj[index].index+''+obj[index].answer[i][0]+
+                '" class="con-check"></span>'+obj[index].answer[i][1]+'</a></div>';
             }
-
-            q.innerHTML = obj.quiz[index].title;
-            for (i=0; i<obj.quiz[index].answer.length; i++) {
-                qu += '<div class="col-sm-6" style="padding: 4px;"><button class="btn btn-dark btn-block"'
-                    +' onclick="" id="bt-1" data-select="1">'+obj.quiz[index].answer[i]+'</button>'
-                    +'</div>';
-            }
-            e.innerHTML = qu;
             index++
-            q.setAttribute('data-q', index);
-            document.getElementById('progress').innerHTML = index;
+            $('#quiz-section').html(txt);
+            $('#quest').attr('data-q', index);
+        } else {
+
+            $('#submit').show();            
+            $('#test').addClass('none-display');
+            $('#test').removeClass('block-display');
+            $('#score').removeClass('none-display');
+            $('#score').addClass('block-display');
         }
         
+    }
+    
+    // Random function for random question and then return
+    function randomThis(objArray) {
+        var returnObj = objArray;
+        
+        if (Array.isArray(returnObj)) {
+            for (i=0; i<returnObj.length; i++) {
+                var randomIndex = Math.floor(Math.random() * (returnObj.length - 1));
+                var tempObj = returnObj[randomIndex];
+                returnObj[randomIndex] = returnObj[i];
+                returnObj[i] = tempObj;
+            }
+        }
+        return returnObj;
+    }
+
+    function getAnswer(index, ansIndex) {
+        if (sendObj[index] == null) {
+            sendObj[index] = ansIndex;
+            $('#id'+index+''+ansIndex).html('<i class="fas fa-check"></i>');
+            setTimeout(() => {getNextQuiz()}, 1000);
+        }
+    }
+
+    function submitData() {
+        sendObj = sendObj.join('');
+        
+        $.ajax({
+            url: 'api/quiz?on=getscore&val='+req+'&payload='+sendObj,
+            type: 'GET',
+            success: (result) => {
+                var json = $.parseJSON(result);
+                $.each(json, (index, val) => {
+
+                });
+            }
+        });
+    }
+
+    function onGetBack() {
+        var data = $('quest').attr('data-q');
+        $('#quest').attr('data-q', data-1);
     }
 </script>
 </html>
